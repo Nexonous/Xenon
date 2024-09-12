@@ -4,6 +4,8 @@
 #include "Logging.hpp"
 #include "../XenonCore/Common.hpp"
 
+#include <array>
+
 namespace Xenon
 {
 	void HexDump(const std::byte* pBegin, const std::byte* pEnd)

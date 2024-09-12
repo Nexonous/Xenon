@@ -8,6 +8,7 @@
 #include <spdlog/sinks/base_sink.h>
 
 #include <vector>
+#include <mutex>
 
 /**
  * Logs class.

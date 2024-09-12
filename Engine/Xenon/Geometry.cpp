@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "Geometry.hpp"
+#include "LODTree.hpp"
 
 #include "../XenonCore/Logging.hpp"
 #include "../XenonCore/CountingFence.hpp"
@@ -737,15 +738,35 @@ namespace Xenon
 		// Load the vertex data and clear the buffer.
 		geometry.m_pVertexBuffer = instance.getFactory()->createBuffer(instance.getBackendDevice(), vertexBufferSize, Backend::BufferType::Vertex);
 		geometry.m_pVertexBuffer->write(ToBytes(vertices.data()), vertexBufferSize);
-		vertices.clear();
 
 		// Load the index data and clear the buffer.
 		if (indexBufferSize > 0)
 		{
 			geometry.m_pIndexBuffer = instance.getFactory()->createBuffer(instance.getBackendDevice(), indexBufferSize, Backend::BufferType::Index);
 			geometry.m_pIndexBuffer->write(ToBytes(indices.data()), indexBufferSize);
-			indices.clear();
 		}
+
+		// Generate LOD tree.
+		for (const auto& mesh : geometry.m_Meshes)
+		{
+			for (const auto& subMesh : mesh.m_SubMeshes)
+			{
+				const auto begin = indices.data() + subMesh.m_IndexOffset;
+				const auto end = begin + (subMesh.m_IndexCount * subMesh.m_IndexSize);
+
+				if (subMesh.m_IndexSize == sizeof(uint16_t))
+				{
+					const auto tree = LODTree(XENON_BIT_CAST(uint16_t*, begin), XENON_BIT_CAST(uint16_t*, end));
+				}
+				else if (subMesh.m_IndexSize == sizeof(uint32_t))
+				{
+					const auto tree = LODTree(XENON_BIT_CAST(uint32_t*, begin), XENON_BIT_CAST(uint32_t*, end));
+				}
+			}
+		}
+
+		vertices.clear();
+		indices.clear();
 
 		return geometry;
 	}

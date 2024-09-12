@@ -7,6 +7,7 @@
 
 #include <imgui.h>
 
+#include <algorithm>
 #include <numeric>
 
 void PerformanceMetrics::begin(std::chrono::nanoseconds delta)

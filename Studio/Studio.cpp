@@ -126,9 +126,9 @@ void Studio::run()
 	// Setup the main material.
 	m_MaterialBuidler.addBaseColorTexture();	// Use the sub mesh's one.
 
-	// Create the occlusion layer for occlusion culling.
-	auto pOcclusionLayer = m_Renderer.createLayer<Xenon::OcclusionLayer>(g_DefaultWidth, g_DefaultHeight, g_DefaultRenderingPriority);
-	pOcclusionLayer->setScene(m_Scene);
+	// // Create the occlusion layer for occlusion culling.
+	// auto pOcclusionLayer = m_Renderer.createLayer<Xenon::OcclusionLayer>(g_DefaultWidth, g_DefaultHeight, g_DefaultRenderingPriority);
+	// pOcclusionLayer->setScene(m_Scene);
 
 #ifdef XENON_ENABLE_EXPERIMENTAL
 	// Create the shadow map layer.
@@ -148,7 +148,7 @@ void Studio::run()
 #else 
 	m_pRenderTarget = m_Renderer.createLayer<Xenon::DefaultRasterizingLayer>(g_DefaultWidth, g_DefaultHeight, g_DefaultRenderingPriority);
 	m_pRenderTarget->setScene(m_Scene);
-	m_pRenderTarget->setOcclusionLayer(pOcclusionLayer);
+	// m_pRenderTarget->setOcclusionLayer(pOcclusionLayer);
 
 	Xenon::Backend::RasterizingPipelineSpecification specification;
 #ifndef XENON_ENABLE_EXPERIMENTAL

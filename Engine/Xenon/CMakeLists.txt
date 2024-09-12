@@ -45,6 +45,8 @@ set(
 	"UserDataContainer.cpp"
 	"UserDataContainer.hpp"
 	"LayerPass.hpp"
+	"LODTree.cpp"
+	"LODTree.hpp"
 
 	"Layers/ClearScreenLayer.cpp"
 	"Layers/ClearScreenLayer.hpp"

@@ -155,8 +155,6 @@ add_compile_definitions(
 	XENON_ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Assets/"
 	XENON_LOG_LEVEL=${XENON_LOG_LEVEL}
 
-	FMT_HEADER_ONLY
-
 	# Conditionally enable ray tracing. 
 	# This is required since not all devices support ray tracing for all backends (for me Vulkan ray tracing does not work).
 	# Comment this out to disable ray tracing from the studio.
@@ -186,6 +184,8 @@ endif()
 
 # Add the SDL as a subdirectory.
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/SDL)
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/fmt)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/spdlog)
 
 # Include the main subdirectories.
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Engine/Xenon)
@@ -230,6 +230,9 @@ if (MSVC)
 		SDL3_test
 		SDL3-shared
 		uninstall
+
+		# fmt
+		spdlog
 			
 		PROPERTIES FOLDER "ThirdParty"
 	)

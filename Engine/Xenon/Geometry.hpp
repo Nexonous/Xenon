@@ -177,6 +177,8 @@ namespace Xenon
 		std::unique_ptr<Backend::Buffer> m_pIndexBuffer = nullptr;
 		std::unique_ptr<Backend::Buffer> m_pVertexBuffer = nullptr;
 
+		std::vector<std::unique_ptr<Backend::Buffer>> m_LODs;
+
 		ImageAndImageViewContainer m_pImageAndImageViews;
 		ImageSamplerContainer m_pImageSamplers;
 
